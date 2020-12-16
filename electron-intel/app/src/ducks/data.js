@@ -54,7 +54,7 @@ export function* dataSaga() {
 function fetchSaga({ search }) {
   return Axios({
     method: "GET",
-    url: `${process.env.REACT_APP_DATA}`,
+    url: `${window.balenaEnv.DATA_URL}`,
   });
 }
 

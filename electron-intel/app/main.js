@@ -32,8 +32,14 @@ const electronConfig = {
   ELECTRON_USER_DATA_DIR: process.env.ELECTRON_USER_DATA_DIR,
 };
 
+// Global env from balena
+global.balenaEnv = process.env;
+
 // Enable / disable hardware acceleration
-if (!electronConfig.ELECTRON_ENABLE_HW_ACCELERATION) {
+if (
+  !electronConfig.ELECTRON_ENABLE_HW_ACCELERATION &&
+  app.disableHardwareAcceleration
+) {
   app.disableHardwareAcceleration();
 }
 

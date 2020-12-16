@@ -12,3 +12,12 @@ services:
       io.resin.features.dbus: "1"
       io.resin.features.kernel-modules: "1"
       io.resin.features.firmware: "1"
+  balena-downloader:
+    build: ./balena-downloader
+    privileged: true
+    ports:
+      - "3000:3000"
+    labels:
+      io.resin.features.dbus: "1"
+      io.resin.features.kernel-modules: "1"
+      io.resin.features.firmware: "1"
