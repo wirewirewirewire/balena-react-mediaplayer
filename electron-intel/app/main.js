@@ -33,10 +33,7 @@ const electronConfig = {
 };
 
 // Enable / disable hardware acceleration
-if (
-  !electronConfig.ELECTRON_ENABLE_HW_ACCELERATION &&
-  app.disableHardwareAcceleration
-) {
+if (!electronConfig.ELECTRON_ENABLE_HW_ACCELERATION) {
   app.disableHardwareAcceleration();
 }
 
