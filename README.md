@@ -10,4 +10,5 @@ Mediaplayer using [balena-downloader](https://github.com/wirewirewirewire/balena
 - clone the repository on your local machine
 - replace `webnuc`in the package.json with the name of the balena app
 - symlink or copy [balena-downloader](https://github.com/wirewirewirewire/balena-downloader) into your project folder (checck if the path in your `docker-compose.yml` is correct
+- set `BASE_URL` for the json file to download the data
 - `npm run balena push` to build the react application and push it to balena.io
