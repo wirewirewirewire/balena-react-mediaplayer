@@ -1,0 +1,14 @@
+version: "2"
+volumes:
+  workdir:
+  router_conf:
+services:
+  electron-intel:
+    build: ./electron-intel
+    privileged: true
+    volumes:
+      - "workdir:/usr/src/app/video/"
+    labels:
+      io.resin.features.dbus: "1"
+      io.resin.features.kernel-modules: "1"
+      io.resin.features.firmware: "1"

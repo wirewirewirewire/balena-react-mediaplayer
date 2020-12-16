@@ -1,0 +1,173 @@
+@import "src/scss/_global.scss";
+@import "src/scss/_font.scss";
+@import "literallycanvas/scss/literallycanvas.scss";
+
+// Text, icons, hover states
+$video-react-primary-foreground-color: #fff !default;
+
+// Control backgrounds (control bar, big play, menus)
+$video-react-primary-background-color: var(--ui-01) !default;
+$video-react-primary-background-transparency: 0.7 !default;
+
+// Hover states, slider backgrounds
+$video-react-secondary-background-color: var(--interactive-01) !default;
+$video-react-secondary-background-transparency: 0.5 !default;
+
+$video-react-text-font-family: "geometric";
+
+$video-react-big-play-button-width: 3em !default;
+$video-react-big-play-button-height: 1.5em !default;
+$video-react-big-play-button-transparency: 0.8 !default;
+
+@import "./videoplayer/video-react.scss";
+
+.video-react-controls-enabled {
+  font-size: 2em;
+}
+
+.App {
+  height: 100%;
+}
+
+html,
+body {
+  background: var(--ui-01);
+  font-family: "geometric";
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root,
+.transitionGroup {
+  height: 100%;
+}
+
+.hg-theme-default .hg-button {
+  padding-top: 2.5vw !important;
+  padding-bottom: 2.5vw !important;
+  //font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.literally {
+  background: var(--ui-01);
+}
+.lc-drawing {
+  top: 0 !important;
+  left: 0 !important;
+  filter: invert(1);
+}
+
+.lc-options {
+  display: none;
+}
+
+$css--variables: true;
+
+$css--reset: tarue;
+$css--body: true;
+
+$color__navy-gray-0: #0f161b;
+
+$button-border-radius: 0px !global;
+$button-font-weight: 700 !global;
+$button-font-size: 2rem !global;
+$button-height: 80px !global;
+$button-padding: 1rem !global;
+$button-padding-sm: 1rem !global;
+$button-border-width: 2px !global;
+$button-outline-width: 1px !global;
+
+@import "./global.scss";
+
+body {
+  --interactive-01: #ffa100; // #e7793a; // Main Link and Button Color
+  --accent-02: #{$color__yellow}; // Darker WFP Blue // $color__teal-20
+  --brand-01: #{$color__main}; // Main Link and Button Color
+  --interactive-02: #{darken(#f8ac2a, 10)}; // Main WFP Color //$color__blue-40
+  --hover-primary: #{darken(#f8ac2a, 10)};
+  --accent-01: #{$color__yellow};
+  --inverse-01: #{$color__white};
+  --inverse-02: #{$color__white};
+  --inverse-03: #{$color__navy-gray-3};
+  --ui-01: #{$color__navy-gray-2};
+  --ui-01-transparent: #{rgba($color__navy-gray-2, 0.3)}; // rgba($color__navy-gray-2, 0.5);
+  --ui-02: #{$color__navy-gray-3};
+  --ui-03: #{$color__navy-gray-4};
+  --ui-04: #{$color__navy-gray-5};
+  --ui-05: #{$color__navy-gray-6};
+  --ui-06: #{$color__navy-gray-7};
+  --text-01: #000;
+  --text-02: #{$color__navy-gray-6};
+  --text-03: #{$color__navy-gray-7};
+  --field-01: #{$color__navy-gray-7};
+  --field-02: #{$color__navy-gray-4};
+  --support-01: #{$color__red};
+  --support-light-01: #{$color__red-20};
+  --support-02: #{$color__lime-60};
+  --support-light-02: #{$color__dark-green-20};
+  --support-03: #{$color__yellow};
+  --support-light-03: #{$color__yellow-20};
+  --support-04: #{$color__main-30};
+  --support-light-04: #{$color__main-20};
+  --nav-01: #{$color__navy-gray-1};
+  --nav-02: #{$color__main-80};
+  --nav-03: #{$color__magenta-30};
+  --nav-04: #{$color__magenta-60};
+  --disabled: #{$color__navy-gray-10};
+  --disabled-01: #{$color__navy-gray-10};
+  --disabled-02: #{$color__navy-gray-8};
+}
+@import "~@wfp/ui/src/globals/scss/styles";
+
+@keyframes tooltip {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.wfp--tooltip {
+  //background: green;
+  background: transparent;
+  display: block;
+  animation-name: tooltip;
+  animation-duration: 0.5s;
+  min-width: 22vw;
+  padding: 0 1.4em;
+  line-height: 1.75em;
+  font-size: 1.2rem;
+  hyphens: auto;
+  box-shadow: none;
+  &:after {
+    position: absolute;
+    top: 4em;
+    left: 2em;
+    right: 2em;
+    bottom: 4em;
+    content: "";
+    z-index: -1;
+    background: var(--ui-01);
+    box-shadow: 0px 30px 30px 50px var(--ui-01), 0 -30px 30px 50px var(--ui-01);
+  }
+}
+
+@keyframes example {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*.wfp--tooltip--visible {
+  animation-name: example;
+  animation-duration: 0.3s;
+}*/
+//@import "./theme.scss";

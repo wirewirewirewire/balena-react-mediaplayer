@@ -1,0 +1,17 @@
+{
+  "name": "balena-react-mediaplayer",
+  "version": "1.0.0",
+  "description": "Mediaplayer using react and electron for Balena",
+  "main": "index.js",
+  "scripts": {
+    "balena:push": "cd electron-intel/app && npm run react:build && cd ../../ && balena push webnuc",
+    "start": "cd electron-intel/app && npm run react:start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Utzel-Butzel@bitbucket.org/polyxostudios/balena-partizipation.git"
+  },
+  "author": "Robert Gühne",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/polyxostudios/balena-partizipation#readme"
+}

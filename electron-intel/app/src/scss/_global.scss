@@ -1,0 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
+$css--variables: false;
+
+@import "~@wfp/ui/src/globals/scss/colors";
+@import "~@wfp/ui/src/globals/scss/vars";
+@import "~@wfp/ui/src/globals/scss/layout";
+@import "~@wfp/ui/src/globals/scss/_typography";

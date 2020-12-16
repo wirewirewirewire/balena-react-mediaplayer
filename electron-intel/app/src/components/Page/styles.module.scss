@@ -1,0 +1,16 @@
+@import "src/scss/_global.scss";
+
+.page {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  //background-color: var(--ui-01);
+}
+
+.secondary {
+  @extend .page;
+  color: var(--text-01);
+  background: var(--ui-02);
+}
