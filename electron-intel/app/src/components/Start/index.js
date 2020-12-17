@@ -14,6 +14,7 @@ import VideoPlayer from "components/VideoPlayer";
 import classnames from "classnames";
 import { getDeviceData } from "ducks/data";
 import { useSelector } from "react-redux";
+import urlEncode from "helpers/urlEncode";
 
 const ResponseType = () => {
   const { id } = useParams();
@@ -78,7 +79,7 @@ const ResponseType = () => {
             ref={playerRef}
           >
             <source
-              src={deviceData.introbackground?.url}
+              src={urlEncode(deviceData.introbackground?.url)}
               type="video/mp4"
               fullscreenButton={false}
             />

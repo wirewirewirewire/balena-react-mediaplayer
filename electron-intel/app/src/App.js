@@ -27,15 +27,18 @@ function App() {
   const [t, i18next] = useTranslation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(data.actions.fetch());
-  }, []);
-
   const dataContent = useSelector(getData);
   const deviceData = useSelector(getDeviceData);
 
   useEffect(() => {
-    console.log("dataContent", deviceData);
+    dispatch(data.actions.fetch());
+    const interval = setInterval(() => {
+      dispatch(data.actions.fetch());
+    }, 1000 * 60 * 0.5);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     if (deviceData && deviceData.color)
       document.body.style.setProperty("--interactive-01", deviceData.color);
   }, [dataContent]);

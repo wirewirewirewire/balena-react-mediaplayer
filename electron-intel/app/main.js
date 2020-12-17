@@ -136,7 +136,7 @@ app.on("ready", () => {
   // if the env-var is set to true,
   // a portion of the screen will be dedicated to the chrome-dev-tools
   if (electronConfig.URL_LAUNCHER_CONSOLE) {
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
   }
 
   process.on("uncaughtException", (err) => {

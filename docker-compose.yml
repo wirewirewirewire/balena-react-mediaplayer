@@ -1,7 +1,7 @@
 version: "2"
 volumes:
   workdir:
-  router_conf:
+  downloader:
 services:
   electron-intel:
     build: ./electron-intel
@@ -12,9 +12,11 @@ services:
       io.resin.features.dbus: "1"
       io.resin.features.kernel-modules: "1"
       io.resin.features.firmware: "1"
-  balena-downloader:
-    build: ./balena-downloader
+  fileupdate:
+    build: ./balena-downloader/fileupdate
     privileged: true
+    volumes:
+      - "downloader:/usr/src/app/update_live/"
     ports:
       - "3000:3000"
     labels:

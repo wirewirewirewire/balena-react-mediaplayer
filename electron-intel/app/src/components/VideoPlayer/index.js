@@ -22,10 +22,14 @@ import { Button } from "@wfp/ui";
 import { NavLink, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getDeviceData } from "ducks/data";
+import urlEncode from "helpers/urlEncode";
 
-function stripEncode(url) {
-  return url.replace("httpsxx:", "").replace("http:", "https");
-}
+/*console.log(
+  "http://fileupdate:3000/config.json".substring(
+    0,
+    "http://fileupdate:3000/config.json".lastIndexOf("/")
+  ) + "/aaaaa"
+);*/
 export default function VideoPlayer({ entry, active, i }) {
   const [i18next] = useTranslation();
   const [controls, setControls] = useState(false);
@@ -83,10 +87,10 @@ export default function VideoPlayer({ entry, active, i }) {
           className={styles.player}
         >
           {deviceData.files.map((entry) => {
-            if (entry.file.mime === "video/mp4") {
+            if (entry.file.mime.split("/")[0] === "video") {
               return (
                 <source
-                  src={`${stripEncode(entry.file?.url)}`}
+                  src={`${urlEncode(entry.file?.url)}`}
                   type="video/mp4"
                   fullscreenButton={false}
                 />
@@ -95,7 +99,7 @@ export default function VideoPlayer({ entry, active, i }) {
               return (
                 <track
                   kind="captions"
-                  src={`${stripEncode(entry.file?.url)}`}
+                  src={`${urlEncode(entry.file?.url)}`}
                   srcLang="en"
                   label="english"
                 />
