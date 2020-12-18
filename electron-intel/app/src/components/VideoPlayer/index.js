@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { Trans, useTranslation } from "react-i18next";
+import qs from "qs";
 
 import {
   Player,
@@ -19,10 +20,11 @@ import Page from "components/Page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/pro-solid-svg-icons";
 import { Button } from "@wfp/ui";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getDeviceData } from "ducks/data";
 import urlEncode from "helpers/urlEncode";
+import { useLocation } from "react-router-dom";
 
 /*console.log(
   "http://fileupdate:3000/config.json".substring(
@@ -34,13 +36,25 @@ export default function VideoPlayer({ entry, active, i }) {
   const [i18next] = useTranslation();
   const [controls, setControls] = useState(false);
   const playerRef = useRef();
+  const { search } = useLocation();
+  const urlParams = qs.parse(search, {
+    ignoreQueryPrefix: true,
+  });
 
   const history = useHistory();
 
   useEffect(() => {
     console.log("active", active);
-    if (active) playerRef.current.play();
-    else {
+    if (active) {
+      playerRef.current.play();
+      playerRef.current.actions.activateTextTrack(1);
+      const state = playerRef.current.getState
+        ? playerRef.current.getState()
+        : undefined;
+      playerRef.current.actions.activateTextTrack(
+        state?.player?.textTracks?.[urlParams.subtitle]
+      );
+    } else {
       playerRef.current.seek(0);
       playerRef.current.pause();
     }
@@ -60,7 +74,7 @@ export default function VideoPlayer({ entry, active, i }) {
       history.push("/");
     }
     // if (prevState.controls !== state.controls) {
-    console.log("updatecontrols", state);
+    //console.log("updatecontrols", state);
     setControls(state.controls);
     //}
   };
@@ -113,7 +127,7 @@ export default function VideoPlayer({ entry, active, i }) {
             <ForwardControl seconds={30} order={1.2} />
             <CurrentTimeDisplay order={4.1} />
             <TimeDivider order={4.2} />
-            <VolumeMenuButton order={7.2} />
+            <VolumeMenuButton order={7.2} vertical />
             <FullscreenToggle disabled />
             {hasSubTitles && <ClosedCaptionButton order={1.3} />}
           </ControlBar>

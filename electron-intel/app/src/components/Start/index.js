@@ -39,7 +39,6 @@ const ResponseType = () => {
           setAnimate(false);
         }, 2000);
       } else {
-        //playerRef.current.seek(3);
         playerRef.current.play();
       }
   }, [id]);
@@ -64,10 +63,26 @@ const ResponseType = () => {
                 ? deviceData.mainvideotext
                 : "Video abspielen"}
             </Trans>
-            <FontAwesomeIcon
-              icon={faChevronRight}
+
+            <svg
+              width="37px"
+              height="56px"
+              viewBox="0 0 37 56"
               className={styles.playIcon}
-            />
+            >
+              <g
+                id="Page-1"
+                stroke="none"
+                strokeWidth="1"
+                fill="none"
+                fillRule="evenodd"
+              >
+                <polygon
+                  fill="#000000"
+                  points="9.30761184 0.115223689 0.115223689 9.30761184 18.5 27.9308981 0.115223689 46.0971645 9.30761184 55.2895526 36.8847763 27.7123882"
+                ></polygon>
+              </g>
+            </svg>
           </h1>
         </PageTitle>
         <div className={styles.startVideo}>
@@ -75,6 +90,7 @@ const ResponseType = () => {
             playsInline
             autoPlay
             muted
+            loop
             className={styles.start}
             ref={playerRef}
           >

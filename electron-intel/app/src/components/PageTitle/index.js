@@ -20,16 +20,12 @@ const PageTitle = (props) => {
     <div className={pageClassNames}>
       {props.children && (
         <NavLink
+          className={`page-title ${styles.pageTitle} ${styles.centerTitle} ${
+            hide ? styles.hide : ""
+          }`}
           to={deviceData.mainvideolink ? deviceData.mainvideolink : "/video/1"}
         >
-          <div
-            className={`page-title ${styles.pageTitle} ${styles.centerTitle} ${
-              hide ? styles.hide : ""
-            }`}
-            {...props}
-          >
-            {props.children}
-          </div>
+          {props.children}
         </NavLink>
       )}
       {showRestart && (
@@ -37,7 +33,7 @@ const PageTitle = (props) => {
           to={
             deviceData.secondaryvideolink
               ? deviceData.secondaryvideolink
-              : "/video/1"
+              : "/video/1/secondary"
           }
         >
           <Button
@@ -51,13 +47,16 @@ const PageTitle = (props) => {
         </NavLink>
       )}
       {props.subTitle && (
-        <div
-          className={`page-subTitle ${styles.pageSubTitle} ${
-            styles.centerTitle
-          } ${hide ? styles.hide : ""}`}
+        <NavLink
+          to={
+            deviceData.secondaryvideolink
+              ? deviceData.secondaryvideolink
+              : "/video/1/secondary"
+          }
+          className={`${styles.pageSubTitle}  ${hide ? styles.hide : ""}`}
         >
           {subTitle}
-        </div>
+        </NavLink>
       )}
     </div>
   );

@@ -4,7 +4,7 @@
   color: var(--text-01);
   font-weight: 800;
   font-family: "geometric";
-  padding: 0.7em 1.3em 0.3em 1em;
+  padding: 0.7em 1.4em 0.3em 1em;
   border: 0;
   background: var(--interactive-01);
   font-size: 2em;
@@ -13,10 +13,12 @@
   top: 0;
   left: 0;
   z-index: 10000;
+  text-decoration: none;
   margin-bottom: 1rem;
-  clip-path: polygon(0 0, 98% 0, 98% 99%, 0% 100%);
+  clip-path: polygon(0 0, 97.5% 0, 98% 99%, 0% 100%);
   transition: all 0.5s;
   transform: translateX(-100%);
+  //box-shadow: 10px 10px 0px rgba(#000, 0.7);
   .active & {
     transform: translateX(0%);
   }
@@ -38,19 +40,20 @@
 
 .pageSubTitle {
   color: var(--text-01);
-  font-weight: bold;
-  padding: 1em;
+  font-weight: 300 !important;
+  font-family: "geometric";
+  padding: 0.7em 1.3em 0.7em 1em;
   border: 0;
   background: var(--interactive-01);
-  font-size: 2em;
-  pointer-events: none;
-  max-width: 50%;
+  font-size: 2em !important;
+  max-width: 30%;
   position: fixed;
-  top: 0;
+  top: 79vh;
   left: 0;
   z-index: 10000;
-  margin-bottom: 1rem;
-  clip-path: polygon(0 0, 100% 0, 98% 95%, 0% 100%);
+  margin-top: 1rem;
+  text-decoration: none;
+  clip-path: polygon(0 0, 98% 0, 96% 98%, 0% 100%);
   transition: all 0.5s;
   transform: translateX(-100%);
   .active & {
