@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./scss/app.scss";
 import Start from "components/Start";
-import Details from "components/Details";
 import {
   HashRouter,
   Route,
@@ -19,6 +18,7 @@ import { Trans, useTranslation } from "react-i18next";
 import VideoPlayer from "components/VideoPlayer";
 import { useDispatch, useSelector } from "react-redux";
 import data, { getData, getDeviceData } from "ducks/data";
+import Color from "color";
 import { Loading } from "@wfp/ui";
 
 const history = createBrowserHistory();
@@ -39,8 +39,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (deviceData && deviceData.color)
+    if (deviceData && deviceData.color) {
       document.body.style.setProperty("--interactive-01", deviceData.color);
+      document.body.style.setProperty(
+        "--text-01",
+        deviceData.textColor
+          ? deviceData.textColor
+          : "#000" /*deviceData.color*/
+      );
+      document.body.style.setProperty(
+        "--interactive-02",
+        Color(deviceData.color).darken(0.1)
+      );
+    }
   }, [dataContent]);
 
   if (dataContent === undefined) return <Loading />;

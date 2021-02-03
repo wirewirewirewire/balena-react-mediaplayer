@@ -13,7 +13,7 @@ services:
       io.resin.features.kernel-modules: "1"
       io.resin.features.firmware: "1"
   fileupdate:
-    build: ./balena-downloader/fileupdate
+    build: ./balena-downloader
     privileged: true
     volumes:
       - "downloader:/usr/src/app/update_live/"

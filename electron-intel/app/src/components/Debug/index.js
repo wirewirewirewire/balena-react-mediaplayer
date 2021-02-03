@@ -10,7 +10,7 @@ const ResponseType = ({ match, questions, responses }) => {
   const [debug, setDebug] = useState(false);
   const [showFullScreen, setShowFullScreen] = useState(false);
   useFullScreen("root", showFullScreen);
-
+  return null;
   if (debug) {
     return (
       <div className={styles.debugWindow}>

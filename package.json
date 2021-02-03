@@ -14,5 +14,8 @@
   },
   "author": "Robert Gühne",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/polyxostudios/balena-partizipation#readme"
+  "homepage": "https://bitbucket.org/polyxostudios/balena-partizipation#readme",
+  "dependencies": {
+    "color": "^3.1.3"
+  }
 }

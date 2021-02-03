@@ -25,19 +25,12 @@ $video-react-big-play-button-transparency: 0.8 !default;
   font-size: 2em;
 }
 
-.App {
-  height: 100%;
+* {
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
-html,
-body {
-  background: var(--ui-01);
-  font-family: "geometric";
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+:focus {
+  outline: none;
 }
 
 #root,
@@ -122,6 +115,21 @@ body {
   --disabled-02: #{$color__navy-gray-8};
 }
 @import "~@wfp/ui/src/globals/scss/styles";
+
+.App {
+  height: 100%;
+}
+
+html,
+body {
+  background: var(--ui-01);
+  font-family: $video-react-text-font-family;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 @keyframes tooltip {
   from {

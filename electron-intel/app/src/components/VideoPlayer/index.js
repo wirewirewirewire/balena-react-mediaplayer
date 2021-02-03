@@ -13,9 +13,9 @@ import {
   CurrentTimeDisplay,
   TimeDivider,
   PlaybackRateMenuButton,
-  VolumeMenuButton,
   FullscreenToggle,
 } from "video-react";
+import VolumeMenuButton from "./VolumeMenuButton";
 import Page from "components/Page";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/pro-solid-svg-icons";
@@ -25,15 +25,10 @@ import { useSelector } from "react-redux";
 import { getDeviceData } from "ducks/data";
 import urlEncode from "helpers/urlEncode";
 import { useLocation } from "react-router-dom";
+import { ReactComponent as BackIcon } from "../Icons/BackIcon.svg";
+import i18next from "i18next";
 
-/*console.log(
-  "http://fileupdate:3000/config.json".substring(
-    0,
-    "http://fileupdate:3000/config.json".lastIndexOf("/")
-  ) + "/aaaaa"
-);*/
 export default function VideoPlayer({ entry, active, i }) {
-  const [i18next] = useTranslation();
   const [controls, setControls] = useState(false);
   const playerRef = useRef();
   const { search } = useLocation();
@@ -44,16 +39,27 @@ export default function VideoPlayer({ entry, active, i }) {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("active", active);
-    if (active) {
+    if (active && playerRef && playerRef.current) {
+      playerRef.current.volume = 1;
       playerRef.current.play();
-      playerRef.current.actions.activateTextTrack(1);
       const state = playerRef.current.getState
         ? playerRef.current.getState()
         : undefined;
-      playerRef.current.actions.activateTextTrack(
-        state?.player?.textTracks?.[urlParams.subtitle]
-      );
+
+      const { textTracks } = state?.player;
+      const index = parseInt(urlParams.subtitle);
+
+      if (textTracks) {
+        Array.from(textTracks).forEach((textTrack, i) => {
+          if (index === i) {
+            console.log("textTracks", "showing");
+            textTrack.mode = "showing";
+            playerRef.current.actions.activateTextTrack(textTrack);
+          } else {
+            textTrack.mode = "hidden";
+          }
+        });
+      }
     } else {
       playerRef.current.seek(0);
       playerRef.current.pause();
@@ -73,10 +79,8 @@ export default function VideoPlayer({ entry, active, i }) {
     if (state.currentTime === state.duration) {
       history.push("/");
     }
-    // if (prevState.controls !== state.controls) {
-    //console.log("updatecontrols", state);
+
     setControls(state.controls);
-    //}
   };
 
   // subscribe state change
@@ -89,6 +93,7 @@ export default function VideoPlayer({ entry, active, i }) {
     ? true
     : false;
 
+  console.log("deviceData", deviceData);
   return (
     <Page className={`${controls ? "controlsActive" : "controlsDisabled"}`}>
       <div className={`${styles.detail} ${active ? styles.detailActive : ""}`}>
@@ -115,7 +120,11 @@ export default function VideoPlayer({ entry, active, i }) {
                   kind="captions"
                   src={`${urlEncode(entry.file?.url)}`}
                   srcLang="en"
-                  label="english"
+                  label={
+                    entry.file?.alternativeText
+                      ? entry.file.alternativeText
+                      : "english"
+                  }
                 />
               );
             }
@@ -129,16 +138,24 @@ export default function VideoPlayer({ entry, active, i }) {
             <TimeDivider order={4.2} />
             <VolumeMenuButton order={7.2} vertical />
             <FullscreenToggle disabled />
-            {hasSubTitles && <ClosedCaptionButton order={1.3} />}
+            {hasSubTitles && (
+              <ClosedCaptionButton order={1.3} offMenuText="keine Untertitel" />
+            )}
           </ControlBar>
           <NavLink to="/">
             <Button
               kind="primary"
               className={`${styles.restart} ${active ? styles.show : ""}`}
-              icon={<FontAwesomeIcon icon={faChevronLeft} />}
               iconReverse
             >
-              <Trans>Übersicht</Trans>
+              <BackIcon className={styles.backIcon} />
+              <Trans>
+                {i18next.language === "en" && deviceData.overviewtext_en
+                  ? deviceData.overviewtext_en
+                  : deviceData.overviewtext
+                  ? deviceData.overviewtext
+                  : "Start"}
+              </Trans>
             </Button>
           </NavLink>
         </Player>

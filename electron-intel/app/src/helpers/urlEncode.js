@@ -1,4 +1,5 @@
 export default function urlEncode(url) {
+  if (!url) return "";
   if (window.balenaEnv?.DATA_URL)
     return (
       window.balenaEnv.DATA_URL.substring(
