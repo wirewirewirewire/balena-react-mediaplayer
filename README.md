@@ -1,6 +1,8 @@
 # balena-react-mediaplayer
 Mediaplayer using [balena-downloader](https://github.com/wirewirewirewire/balena-downloader), react and electron for [balena.io](https://www.balena.io/)
 
+### Introduction
+[managing digital devices for exhibitions](https://wirewire.de/article/managing-digital-devices-for-exhibitions)
 
 ### Requirements
 -  [balena.io](https://www.balena.io/) account
