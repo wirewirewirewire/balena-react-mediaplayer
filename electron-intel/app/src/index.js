@@ -6,11 +6,24 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import { store, persistor } from "./store";
 
+import { createBrowserHistory } from "history";
+import {
+  HashRouter,
+  Route,
+  Redirect,
+  Switch,
+  useLocation,
+} from "react-router-dom";
+
+const history = createBrowserHistory();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <HashRouter history={history}>
+          <App />
+        </HashRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

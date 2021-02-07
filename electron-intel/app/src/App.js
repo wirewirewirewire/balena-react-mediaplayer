@@ -8,10 +8,10 @@ import {
   Switch,
   useLocation,
 } from "react-router-dom";
-import { createBrowserHistory } from "history";
+
 import Debug from "components/Debug";
 import fadeTransition from "./scss/pagetransition.module.scss";
-
+import qs from "qs";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { Trans, useTranslation } from "react-i18next";
@@ -21,8 +21,6 @@ import data, { getData, getDeviceData } from "ducks/data";
 import Color from "color";
 import { Loading } from "@wfp/ui";
 
-const history = createBrowserHistory();
-
 function App() {
   const [t, i18next] = useTranslation();
   const dispatch = useDispatch();
@@ -30,7 +28,16 @@ function App() {
   const dataContent = useSelector(getData);
   const deviceData = useSelector(getDeviceData);
 
+  const { search } = useLocation();
+  const urlParams = qs.parse(search, {
+    ignoreQueryPrefix: true,
+  });
+
   useEffect(() => {
+    console.log("urlParams", urlParams);
+    if (urlParams.dataOverrideUrl)
+      window.dataOverrideUrl = urlParams.dataOverrideUrl;
+
     dispatch(data.actions.fetch());
     const interval = setInterval(() => {
       dispatch(data.actions.fetch());
@@ -59,13 +66,12 @@ function App() {
   return (
     <>
       <Debug />
-      <HashRouter history={history}>
-        <Switch>
-          <Route path="*">
-            <AnimatedRoutes />
-          </Route>
-        </Switch>
-      </HashRouter>
+
+      <Switch>
+        <Route path="*">
+          <AnimatedRoutes />
+        </Route>
+      </Switch>
     </>
   );
 }

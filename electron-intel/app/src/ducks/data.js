@@ -52,13 +52,14 @@ export function* dataSaga() {
 }
 
 function fetchSaga({ search }) {
+  const dataUrl = window.dataOverrideUrl
+    ? dataOverrideUrl
+    : window.balenaEnv?.DATA_URL
+    ? window.balenaEnv.DATA_URL
+    : process.env.REACT_APP_DATA_URL;
   return Axios({
     method: "GET",
-    url: `${
-      window.balenaEnv?.DATA_URL
-        ? window.balenaEnv.DATA_URL
-        : process.env.REACT_APP_DATA_URL
-    }`,
+    url: `${dataUrl}`,
   });
 }
 
