@@ -6,7 +6,7 @@
   "scripts": {
     "balena:push": "cd electron-intel/app && npm run react:build && cd ../../ && balena push webnuc",
     "start": "cd electron-intel/app && npm run react:start",
-    "vercel": "cd electron-intel/app && vercel",
+    "vercel": "cd electron-intel/app && vercel --prod",
     "electron:start": "cd electron-intel/app && npm run react:build && npm run dev"
   },
   "repository": {
